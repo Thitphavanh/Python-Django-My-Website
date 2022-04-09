@@ -1,0 +1,86 @@
+{% extends 'myapp/base.html' %}
+{% load humanize %}
+
+{% block content %} 
+
+<div class="container" style="margin-bottom: 100px;"> 
+ <h2>ອັພເດດເລກຂົນສົ່ງ</h2>
+  <p>ORDER-ID : {{orderid}} </p>
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="trackingnumber">ເລກຂົນສົ່ງ / ຂົນສົ່ງ / ລົງທະບຽນ</label>
+      <input type="text" class="form-control" id="trackingnumber" name="trackingnumber">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div class="container">
+  <h3>ຂໍ້ມູນການຈັດສົ່ງ</h3>
+  <p>
+    ຊື່ຜູ້ຮັບ : {{order.name}}<br>
+    ເບີໂທ : {{order.tel}}<br>
+    ທີ່ຢູ່ຈັດສົ່ງ : {{order.address}}<br>
+    {% if order.shipping == 'ems' %}
+        ຮູບແບບການຈັດສົ່ງ : ຂົນສົ່ງທົ່ວໄປ
+    {% else %}
+        ຮູບແບບການຈັດສົ່ງ : ລົງທະບຽນ
+    {% endif %}<br>
+
+    {% if order.payment == 'transfer' %}
+        ຊຳລະຜ່ານ : ໂອນເງິນເຂົ້າບັນຊີທະນາຄານ
+    {% else %}
+        ຊຳລະຜ່ານ : ເກັບເງິນປາຍທາງ
+    {% endif %}<br>
+    ໝາຍເຫດ : {{other}}<br>
+  </p>
+</div>
+
+<div class="container">
+  <h2>ລາຍການສິນຄ້າທັງໝົດ</h2>
+  <p>ລາຍການສິນຄ້າທີ່ສັ່ງຊື້</p>            
+  <table class="table">
+  <thead>
+  <tr>
+    <th style="text-align: center;">ລະຫັດສິນຄ້າ</th>
+    <th style="text-align: center;">ຊື່ສິນຄ້າ</th>
+    <th style="text-align: center;">ລາຄາສິນຄ້າ</th>
+    <th style="text-align: center;">ຈຳນວນສິນຄ້າ</th>
+    <th style="text-align: center;">ລາຄາລວມ</th>
+
+  </tr>
+  </thead>
+  <tbody>
+
+    {% for pd in odlist %}
+  <tr>
+    <td style="text-align: center;" >{{pd.productid}}</td>
+    <td style="text-align: center;" >{{pd.productname}}</td>
+    <td style="text-align: center;" >{{pd.price|intcomma}}</td>
+    <td style="text-align: center;" >{{pd.quantity|intcomma}}</td>
+    <td style="text-align: center;" >{{pd.total|intcomma}}</td>
+
+  </tr>
+  {% endfor %}
+  <tr>
+    <td><h3>Total</h3></td>
+    <td></td>
+    <td></td>
+    <td style="text-align: center;" ><h4>{{count|intcomma}}</h4></td>
+    <td style="text-align: center;" ><h4>{{total|intcomma}}</h4></td>
+  </tr>
+
+    </tbody>
+  </table>
+<br>
+
+<p>ຄ່າຂົນສົ່ງ : {{order.shipcost|intcomma}} ກີບ</p>
+
+<h3>ລວມຍອດໂອນທັງໝົດ : {{total|add:order.shipcost|intcomma}} ກີບ</h3><br>
+
+</div>
+
+{% endblock content %}

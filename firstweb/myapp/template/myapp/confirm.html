@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %} 
+  <h3>ຍຶືນຍັນການສະໝັກ</h3>
+
+  {% if status == 'found' %}
+  <div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>ຍືນຍັນສຳເລັດ </strong>ເຈົ້າໄດ້ຮັບການຍຶືນຍັນການສະໝັກເປັນສະມາຊິກແລ້ວ !
+  </div>
+
+  {% else %}
+  <div class="alert alert-warning alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>ບໍ່ສາມາດຍືນຍັນໄດ້ ! </strong> ກະລຸນາກວດສອບອີເມລ໌ອີກຄັ້ງ <<ຂໍລະຫັດອີກຄັ້ງ>>
+  </div>
+
+  {% endif %}
+
+{% endblock content %}
+
+
+

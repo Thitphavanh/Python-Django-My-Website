@@ -1,0 +1,85 @@
+{% extends 'myapp/base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+
+<div class="container">
+  <h3>ຂໍ້ມູນການຈັດສົ່ງ</h3>
+  <p>
+    ORDER-ID : {{order.orderid}}<br>
+    ຊື່ຜູ້ຮັບ : {{order.name}}<br>
+    ເບີໂທ : {{order.tel}}<br>
+    ທີ່ຢູ່ຈັດສົ່ງ : {{order.address}}<br>
+    {% if order.shipping == 'ems' %}
+        ຮູບແບບການຈັດສົ່ງ : ຂົນສົ່ງທົ່ວໄປ
+    {% else %}
+        ຮູບແບບການຈັດສົ່ງ : ລົງທະບຽນ
+    {% endif %}<br>
+
+    {% if order.payment == 'transfer' %}
+        ຊຳລະຜ່ານ : ໂອນເງິນເຂົ້າບັນຊີທະນາຄານ
+    {% else %}
+        ຊຳລະຜ່ານ : ເກັບເງິນປາຍທາງ
+    {% endif %}<br>
+    ໝາຍເຫດ : {{other}}<br>
+  </p>
+</div>
+
+<div class="container">
+  <h2>ລາຍການສິນຄ້າທັງໝົດ</h2>
+  <p>ລາຍການສິນຄ້າທີ່ສັ່ງຊື້</p>            
+  <table class="table">
+  <thead>
+  <tr>
+    <th style="text-align: center;">ລະຫັດສິນຄ້າ</th>
+    <th style="text-align: center;">ຊື່ສິນຄ້າ</th>
+    <th style="text-align: center;">ລາຄາສິນຄ້າ</th>
+    <th style="text-align: center;">ຈຳນວນສິນຄ້າ</th>
+    <th style="text-align: center;">ລາຄາລວມ</th>
+
+  </tr>
+  </thead>
+  <tbody>
+
+    {% for pd in odlist %}
+  <tr>
+    <td style="text-align: center;" >{{pd.productid}}</td>
+    <td style="text-align: center;" >{{pd.productname}}</td>
+    <td style="text-align: center;" >{{pd.price|intcomma}}</td>
+    <td style="text-align: center;" >{{pd.quantity|intcomma}}</td>
+    <td style="text-align: center;" >{{pd.total|intcomma}}</td>
+
+ 
+  </tr>
+  {% endfor %}
+  <tr>
+    <td><h3>Total</h3></td>
+    <td></td>
+    <td></td>
+    <td style="text-align: center;" ><h4>{{count|intcomma}}</h4></td>
+    <td style="text-align: center;" ><h4>{{total|intcomma}}</h4></td>
+  </tr>
+
+    </tbody>
+  </table>
+
+
+<p>ຄ່າຂົນສົ່ງ : {{order.shipcost|intcomma}} ກີບ</p>
+
+<h3>ລວມຍອດໂອນທັງໝົດ : {{total|add:order.shipcost|intcomma}} ກີບ</h3><br>
+<h4>ໂອນເຂົ້າບັນຊີນີ້ໄດ້ເລີຍ : </h4><br>
+<p>
+  ທະນາຄານການຄ້າສາກົນລະຫວ່າງປະເທດ<br>
+  ຊື່ບັນຊື່ : THITPHAVANH PHONGSAVATH<br>
+  ເລກບັນຊີ : 0301200003434679<br><br>
+
+  ທະນາຄານຮ່ວມພັດທະນາ<br>
+  ເລກບັນຊີ : 0410120000124679<br>
+  ຊື່ບັນຊື່ : THITPHAVANH PHONGSAVATH<br>
+
+</p>
+
+</div>
+
+{% endblock content %}
