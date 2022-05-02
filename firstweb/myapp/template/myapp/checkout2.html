@@ -5,79 +5,85 @@
 {% block content %}
 
 <div class="container">
-  <h3>ຂໍ້ມູນການຈັດສົ່ງ</h3>
-  <p>
-    ຊື່ຜູ້ຮັບ : {{name}}<br>
-    ເບີໂທ : {{tel}}<br>
-    ທີ່ຢູ່ຈັດສົ່ງ : {{address}}<br>
-    {% if shipping == 'ems' %}
-        ຮູບແບບການຈັດສົ່ງ : ຂົນສົ່ງທົ່ວໄປ
-    {% else %}
-        ຮູບແບບການຈັດສົ່ງ : ລົງທະບຽນ
-    {% endif %}<br>
+	<h3>ຂໍ້ມູນການຈັດສົ່ງ</h3>
+	<p>
+		ຊື່ຜູ້ຮັບ : {{name}}<br>
+		ເບີໂທ : {{tel}}<br>
+		ທີ່ຢູ່ຈັດສົ່ງ : {{address}}<br>
+		{% if shipping == 'ems' %}
+		ຮູບແບບການຈັດສົ່ງ : ຂົນສົ່ງທົ່ວໄປ
+		{% else %}
+		ຮູບແບບການຈັດສົ່ງ : ລົງທະບຽນ
+		{% endif %}<br>
 
-    {% if payment == 'transfer' %}
-        ຊຳລະຜ່ານ : ໂອນເງິນເຂົ້າບັນຊີທະນາຄານ
-    {% else %}
-        ຊຳລະຜ່ານ : ເກັບເງິນປາຍທາງ
-    {% endif %}<br>
-    ໝາຍເຫດ : {{other}}<br>
-  </p>
+		{% if payment == 'transfer' %}
+		ຊຳລະຜ່ານ : ໂອນເງິນເຂົ້າບັນຊີທະນາຄານ
+		{% else %}
+		ຊຳລະຜ່ານ : ເກັບເງິນປາຍທາງ
+		{% endif %}<br>
+		ໝາຍເຫດ : {{other}}<br>
+	</p>
 </div>
 
 <div class="container">
-  <h2>ລາຍການສິນຄ້າທັງໝົດ</h2>
-  <p>ລາຍການສິນຄ້າທີ່ສັ່ງຊື້</p>            
-  <table class="table">
-  <thead>
-  <tr>
-    <th>ລະຫັດສິນຄ້າ</th>
-    <th>ຊື່ສິນຄ້າ</th>
-    <th>ລາຄາສິນຄ້າ</th>
-    <th>ຈຳນວນສິນຄ້າ</th>
-    <th>ລາຄາລວມ</th>
+	<h2>ລາຍການສິນຄ້າທັງໝົດ</h2>
+	<p>ລາຍການສິນຄ້າທີ່ສັ່ງຊື້</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ລະຫັດສິນຄ້າ</th>
+				<th>ຊື່ສິນຄ້າ</th>
+				<th>ລາຄາສິນຄ້າ</th>
+				<th>ຈຳນວນສິນຄ້າ</th>
+				<th>ລາຄາລວມ</th>
 
-  </tr>
-  </thead>
-  <tbody>
+			</tr>
+		</thead>
+		<tbody>
 
-    {% for pd in mycart %}
-  <tr>
-    <td>{{pd.productid}}</td>
-    <td>{{pd.productname}}</td>
-    <td style="text-align: right;" >{{pd.price|intcomma}}</td>
-    <td style="text-align: right;" >{{pd.quantity|intcomma}}</td>
-    <td style="text-align: right;" >{{pd.total|intcomma}}</td>
+			{% for pd in mycart %}
+			<tr>
+				<td>{{pd.productid}}</td>
+				<td>{{pd.productname}}</td>
+				<td style="text-align: right;">{{pd.price|intcomma}}</td>
+				<td style="text-align: right;">{{pd.quantity|intcomma}}</td>
+				<td style="text-align: right;">{{pd.total|intcomma}}</td>
 
- 
-  </tr>
-  {% endfor %}
-  <tr>
-    <td><h3>Total</h3></td>
-    <td></td>
-    <td></td>
-    <td style="text-align: right;" ><h4>{{count}}</h4></td>
-    <td style="text-align: right;" ><h4>{{total|intcomma}}</h4></td>
-  </tr>
 
-    </tbody>
-  </table>
-<br>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td>
+					<h3>Total</h3>
+				</td>
+				<td></td>
+				<td></td>
+				<td style="text-align: right;">
+					<h4>{{count}}</h4>
+				</td>
+				<td style="text-align: right;">
+					<h4>{{total|intcomma}}</h4>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+	<br>
 </div>
 
-  <form method="POST">
-    {% csrf_token %}
+<form method="POST">
+	{% csrf_token %}
 
-    <input type="hidden" id="name" name="name" value="{{name}}">
-    <input type="hidden" id="tel" name="tel" value="{{tel}}">
-    <input type="hidden" id="address" name="address" value="{{address}}">
-    <input type="hidden" id="shipping" name="shipping" value="{{shipping}}">
-    <input type="hidden" id="payment" name="payment" value="{{payment}}">
-    <input type="hidden" id="other" name="other" value="{{other}}">
-    <input type="hidden" id="page" name="page" value="confirm">
+	<input type="hidden" id="name" name="name" value="{{name}}">
+	<input type="hidden" id="tel" name="tel" value="{{tel}}">
+	<input type="hidden" id="address" name="address" value="{{address}}">
+	<input type="hidden" id="shipping" name="shipping" value="{{shipping}}">
+	<input type="hidden" id="payment" name="payment" value="{{payment}}">
+	<input type="hidden" id="other" name="other" value="{{other}}">
+	<input type="hidden" id="page" name="page" value="confirm">
 
-    <button type="submit" class="btn btn-primary">confirm</button>
+	<button type="submit" class="btn btn-primary">confirm</button>
 
-  </form>  
+</form>
 
 {% endblock content %}

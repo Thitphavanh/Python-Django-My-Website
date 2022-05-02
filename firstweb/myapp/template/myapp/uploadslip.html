@@ -1,44 +1,44 @@
 {% extends 'myapp/base.html' %}
 {% load humanize %}
 
-{% block content %} 
+{% block content %}
 
-<div class="container" style="margin-bottom: 100px;"> 
- <h2>ອັພໂຫຼດໃບບິນ</h2>
-  <p>ອັພໂຫຼດໃບບິນຂອງ ORDER : {{orderid}}<br>
-    ຮູບແບບການຈັດສົ່ງ : {{oddetail.shipping}}<br>
-    {% if oddetail.payment|intcomma == 'cod' %}
-      ບວກຄ່າເກັບປາຍທາງ 2,000 ກີບ<br>
-    {% endif %}
-    ຈຳນວນສິນຄ້າ : {{count|intcomma}} ກ່ອງ<br>
-    ຍອດລວມສິນຄ້າ : {{total|intcomma}} ກີບ<br>
-    ຄ່າຂົນສົ່ງ : {{shipcost|intcomma}} ກີບ <br>
-  </p>
-  <h3>ລວມຍອດໂອນທັງໝົດ : {{grandtotal|intcomma}} ກີບ</h3> 
+<div class="container" style="margin-bottom: 100px;">
+	<h2>ອັພໂຫຼດໃບບິນ</h2>
+	<p>ອັພໂຫຼດໃບບິນຂອງ ORDER : {{orderid}}<br>
+		ຮູບແບບການຈັດສົ່ງ : {{oddetail.shipping}}<br>
+		{% if oddetail.payment|intcomma == 'cod' %}
+		ບວກຄ່າເກັບປາຍທາງ 2,000 ກີບ<br>
+		{% endif %}
+		ຈຳນວນສິນຄ້າ : {{count|intcomma}} ກ່ອງ<br>
+		ຍອດລວມສິນຄ້າ : {{total|intcomma}} ກີບ<br>
+		ຄ່າຂົນສົ່ງ : {{shipcost|intcomma}} ກີບ <br>
+	</p>
+	<h3>ລວມຍອດໂອນທັງໝົດ : {{grandtotal|intcomma}} ກີບ</h3>
 
-  {% if oddetail.slip %}
+	{% if oddetail.slip %}
 
-    <img src="{{oddetail.slip.url}}">
+	<img src="{{oddetail.slip.url}}">
 
-  {% else %}
+	{% else %}
 
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
 
-    <div class="form-group">
-      <label for="sliptime">ວັນເວລາທີ່ໂອນ :</label>
-      <input type="text" class="form-control" id="sliptime" name="sliptime" placeholder="ໂຕຢ່າງ : ເວລາ ວັນ/ເດືອນ/ປີ">
-    </div>
+		<div class="form-group">
+			<label for="sliptime">ວັນເວລາທີ່ໂອນ :</label>
+			<input type="text" class="form-control" id="sliptime" name="sliptime" placeholder="ໂຕຢ່າງ : ເວລາ ວັນ/ເດືອນ/ປີ">
+		</div>
 
-    <div class="form-group">
-      <label for="slip">File ໃບບິນ ໂອນເງິນ :</label>
-      <input type="file" class="form-control" id="slip" name="slip">
-    </div>
+		<div class="form-group">
+			<label for="slip">File ໃບບິນ ໂອນເງິນ :</label>
+			<input type="file" class="form-control" id="slip" name="slip">
+		</div>
 
-    <button type="submit" class="btn btn-primary">Confirm</button>
-  </form>
+		<button type="submit" class="btn btn-primary">Confirm</button>
+	</form>
 
-  {% endif %}
+	{% endif %}
 
 </div>
 

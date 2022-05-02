@@ -1,50 +1,50 @@
 {% extends 'myapp/base.html' %}
 
-{% block content %} 
+{% block content %}
 
-<div class="container" style="margin-bottom: 100px;"> 
- <h2>ເພີ່ມສິນຄ້າໃນລະບົບ</h2>
-  <p>ເຈົ້າສາມາດເພີ່ມສິນຄ້າເຂົ້້າໄປໃນລະບົບໄດ້ (ສະເພາະ admin)</p>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="container" style="margin-bottom: 100px;">
+	<h2>ເພີ່ມສິນຄ້າໃນລະບົບ</h2>
+	<p>ເຈົ້າສາມາດເພີ່ມສິນຄ້າເຂົ້້າໄປໃນລະບົບໄດ້ (ສະເພາະ admin)</p>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
 
-    <div class="form-group">
-      <label for="name">ຊື່ສິນຄ້າ:</label>
-      <input type="text" class="form-control" id="name" name="name">
-    </div>
+		<div class="form-group">
+			<label for="name">ຊື່ສິນຄ້າ:</label>
+			<input type="text" class="form-control" id="name" name="name">
+		</div>
 
-     <div class="form-group">
-      <label for="price">ລາຄາ:</label>
-      <input type="text" class="form-control" id="price" name="price">
-    </div>
+		<div class="form-group">
+			<label for="price">ລາຄາ:</label>
+			<input type="text" class="form-control" id="price" name="price">
+		</div>
 
-    <div class="form-group">
-      <label for="detail">ລາຍລະອຽດ:</label>
-      <textarea class="form-control" rows="5" id="detail" name="detail"></textarea>
-    </div>
+		<div class="form-group">
+			<label for="detail">ລາຍລະອຽດ:</label>
+			<textarea class="form-control" rows="5" id="detail" name="detail"></textarea>
+		</div>
 
-     <div class="form-group">
-      <label for="imageurl">URL ຮູບສິນຄ້າ:</label>
-      <input type="text" class="form-control" id="imageurl" name="imageurl">
-    </div>
+		<div class="form-group">
+			<label for="imageurl">URL ຮູບສິນຄ້າ:</label>
+			<input type="text" class="form-control" id="imageurl" name="imageurl">
+		</div>
 
-    <div class="form-group">
-      <label for="quantity">ຈຳນວນສິນຄ້າ:</label>
-      <input type="text" class="form-control" id="quantity" name="quantity">
-    </div>
+		<div class="form-group">
+			<label for="quantity">ຈຳນວນສິນຄ້າ:</label>
+			<input type="text" class="form-control" id="quantity" name="quantity">
+		</div>
 
-    <div class="form-group">
-      <label for="unit">ໜ່ວຍສິນຄ້າ:</label>
-      <input type="text" class="form-control" id="unit" name="unit">
-    </div>
+		<div class="form-group">
+			<label for="unit">ໜ່ວຍສິນຄ້າ:</label>
+			<input type="text" class="form-control" id="unit" name="unit">
+		</div>
 
-    <div class="form-group">
-      <label for="imageupload">ເລືອກຮູບພາບ</label>
-      <input type="file" class="form-control" id="imageupload" name="imageupload">
-    </div>
+		<div class="form-group">
+			<label for="imageupload">ເລືອກຮູບພາບ</label>
+			<input type="file" class="form-control" id="imageupload" name="imageupload">
+		</div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 </div>
 
 {% endblock content %}

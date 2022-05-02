@@ -2,110 +2,120 @@
 {% load humanize %}
 
 {% block content %}
-      
+
 <div class="container">
-  <h2>ລາຍການສັ່ງຊື້ທັງໝົດ (admin) </h2>
-  <p>ລາຍການສັ່ງຊື້ ແລະ ສະຖານະການສັ່ງຊື້</p>            
-  <table class="table">
-  <thead>
-  <tr>
-    <th style="font-size:18px;text-align: center;">ເວລາສັ່ງຊື້</th>
-    <th style="font-size:18px;text-align: center;">ລະຫັດສັ່ງຊື້</th>
-    <th style="font-size:18px;text-align: center;">ຍອດລວມ</th>
-    <th style="font-size:18px;text-align: center;">ຄ່າສົ່ງ</th>
-    <th style="font-size:18px;text-align: center;">ຍອດໂອນ</th>
-    <th style="font-size:18px;text-align: center;">ໃບບິນ</th>
-    <th style="font-size:18px;text-align: center;">ຈ່າຍແລ້ວ</th>
-    <th style="font-size:18px;text-align: center;">ເລກລະຫັດຂົນສົ່ງ</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for od in allorder %}
-  <tr>
-    <td><a style="font-size:13px;">{{od.stamp}} </a></td>
+	<h2>ລາຍການສັ່ງຊື້ທັງໝົດ (admin) </h2>
+	<p>ລາຍການສັ່ງຊື້ ແລະ ສະຖານະການສັ່ງຊື້</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th style="font-size:18px;text-align: center;">ເວລາສັ່ງຊື້</th>
+				<th style="font-size:18px;text-align: center;">ລະຫັດສັ່ງຊື້</th>
+				<th style="font-size:18px;text-align: center;">ຍອດລວມ</th>
+				<th style="font-size:18px;text-align: center;">ຄ່າສົ່ງ</th>
+				<th style="font-size:18px;text-align: center;">ຍອດໂອນ</th>
+				<th style="font-size:18px;text-align: center;">ໃບບິນ</th>
+				<th style="font-size:18px;text-align: center;">ຈ່າຍແລ້ວ</th>
+				<th style="font-size:18px;text-align: center;">ເລກລະຫັດຂົນສົ່ງ</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for od in allorder %}
+			<tr>
+				<td><a style="font-size:13px;">{{od.stamp}} </a></td>
 
-    <td> 
-      <a href="{% url 'updatetracking' od.orderid%} " style="font-size:13px;">{{od.orderid}} </a>  <a style="font-size:13px;">({{od.name}}) </a>
-    </td>
-    <td><a style="font-size:13px;">{{od.total|intcomma}} </a></td>
-    <td><a style="font-size:13px;">{{od.shipcost|intcomma}} </a></td>
-    <td><a style="font-size:13px;">{{od.total|add:od.shipcost|intcomma}} </a></td>
-    <td>
+				<td>
+					<a href="{% url 'updatetracking' od.orderid%} " style="font-size:13px;">{{od.orderid}} </a> <a
+						style="font-size:13px;">({{od.name}}) </a>
+				</td>
+				<td><a style="font-size:13px;">{{od.total|intcomma}} </a></td>
+				<td><a style="font-size:13px;">{{od.shipcost|intcomma}} </a></td>
+				<td><a style="font-size:13px;">{{od.total|add:od.shipcost|intcomma}} </a></td>
+				<td>
 
-      {% if od.slip %}
+					{% if od.slip %}
 
-       <a href="{{od.slip.url}}"><i class="fa fa-address-card-o" style="font-size:13px;color:orange;"> ເບິ່ງໃບບິນ</i></a>
+					<a href="{{od.slip.url}}"><i class="fa fa-address-card-o" style="font-size:13px;color:orange;">
+							ເບິ່ງໃບບິນ</i></a>
 
-      {% else %}
+					{% else %}
 
-        <i class="fa fa-close" style="font-size:13px;color:darkred;"> ຍັງບໍ່ທັນອັພໂຫຼດ</i>
+					<i class="fa fa-close" style="font-size:13px;color:darkred;"> ຍັງບໍ່ທັນອັພໂຫຼດ</i>
 
-      {% endif %}
+					{% endif %}
 
 
 
-    </td>
-    <td>
+				</td>
+				<td>
 
-      {% if od.paid and od.slip  %}
-        <a href="{% url 'updatestatus' od.orderid 'cancel' %}"><i class="fa fa-check-square-o" style="font-size:13px;color:green;"> ຈ່າຍແລ້ວ</i></a>
+					{% if od.paid and od.slip %}
+					<a href="{% url 'updatestatus' od.orderid 'cancel' %}"><i class="fa fa-check-square-o"
+							style="font-size:13px;color:green;"> ຈ່າຍແລ້ວ</i></a>
 
-      {% elif od.paid == False and not od.slip %}
+					{% elif od.paid == False and not od.slip %}
 
-      <i class="fa fa-close" style="font-size:13px;color:darkred;"> ຍັງບໍ່ທັນຈ່າຍ</i>
-       
-      {% else %}
+					<i class="fa fa-close" style="font-size:13px;color:darkred;"> ຍັງບໍ່ທັນຈ່າຍ</i>
 
-        <a href="{% url 'updatestatus' od.orderid 'confirm' %}"><i class="fa fa-check" style="font-size:13px;color:darkblue;"> ຍືນຍັນ</i></a>
+					{% else %}
 
-      {% endif %}
-      
-    </td>
-    <td>
+					<a href="{% url 'updatestatus' od.orderid 'confirm' %}"><i class="fa fa-check"
+							style="font-size:13px;color:darkblue;"> ຍືນຍັນ</i></a>
 
-      {% if od.trackingnumber != None %}
+					{% endif %}
 
-       <i class="fa fa-cube" style="font-size:13px;color:grey;"> {{od.trackingnumber}}</i>
-   
-       
+				</td>
+				<td>
 
-       {% endif %}
+					{% if od.trackingnumber != None %}
 
-    </td>
-  </tr>
-  {% endfor %}
-  
-    </tbody>
-  </table>
+					<i class="fa fa-cube" style="font-size:13px;color:grey;"> {{od.trackingnumber}}</i>
+
+
+
+					{% endif %}
+
+				</td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
 </div>
 
 
 <ul class="pagination">
 
-  {% if allorder.has_previous and allorder.has_next != True %}
-    <li class="page-item"><a class="page-link" href="?page={{allorder.previous_page_number}}"> < </a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-2}}">{{allorder.number|add:-2}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-1}}">{{allorder.number|add:-1}}</a></li>
-    <li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
-     <li class="page-item disabled"><a class="page-link" href=""> > </a></li>
-  {% endif %}
+	{% if allorder.has_previous and allorder.has_next != True %}
+	<li class="page-item"><a class="page-link" href="?page={{allorder.previous_page_number}}">
+			< </a>
+	</li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-2}}">{{allorder.number|add:-2}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-1}}">{{allorder.number|add:-1}}</a></li>
+	<li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
+	<li class="page-item disabled"><a class="page-link" href=""> > </a></li>
+	{% endif %}
 
- {% if allorder.has_previous and  allorder.has_next %}
-   <li class="page-item"><a class="page-link" href="?page={{allorder.previous_page_number}}"> < </a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-1}}">{{allorder.number|add:-1}}</a></li>
-     <li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:1}}">{{allorder.number|add:1}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.next_page_number}}"> > </a></li>
-  {% endif %}
+	{% if allorder.has_previous and allorder.has_next %}
+	<li class="page-item"><a class="page-link" href="?page={{allorder.previous_page_number}}">
+			< </a>
+	</li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:-1}}">{{allorder.number|add:-1}}</a></li>
+	<li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:1}}">{{allorder.number|add:1}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.next_page_number}}"> > </a></li>
+	{% endif %}
 
-  {% if allorder.has_next and allorder.has_previous != True %}
-    <li class="page-item disabled"><a class="page-link" href=""> < </a></li>
-    <li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:1}}">{{allorder.number|add:1}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.number|add:2}}">{{allorder.number|add:2}}</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{allorder.next_page_number}}"> > </a></li>
-  {% endif %}
+	{% if allorder.has_next and allorder.has_previous != True %}
+	<li class="page-item disabled"><a class="page-link" href="">
+			< </a>
+	</li>
+	<li class="page-item active"><a class="page-link" href="?page={{allorder.number}}">{{allorder.number}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:1}}">{{allorder.number|add:1}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.number|add:2}}">{{allorder.number|add:2}}</a></li>
+	<li class="page-item"><a class="page-link" href="?page={{allorder.next_page_number}}"> > </a></li>
+	{% endif %}
 
-  </ul>  <a <i style="font-size:18px;color:grey;"> ໜ້າ {{allorder.number}} ຈາກ {{allorder.paginator.num_pages}} </i></a> 
+</ul> <a <i style="font-size:18px;color:grey;"> ໜ້າ {{allorder.number}} ຈາກ {{allorder.paginator.num_pages}} </i></a>
 
 {% endblock content %}

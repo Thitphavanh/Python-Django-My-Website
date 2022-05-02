@@ -1,120 +1,120 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-  <h3>ສິນຄ້າລ່າສຸດ</h3>
-   <p>ສິນຄ້າລ່າສຸດຂອງຮ້ານ</p>
+<h3>ສິນຄ້າລ່າສຸດ</h3>
+<p>ສິນຄ້າລ່າສຸດຂອງຮ້ານ</p>
 
-   <div class="container-fluid">
+<div class="container-fluid">
 
-    <div class="row">
+	<div class="row">
 
-   {% for pd in product %}
+		{% for pd in product %}
 
-     <div class="container col-sm-4">
-     <div class="card" style="width: 350px; height: 550;">
+		<div class="container col-sm-4">
+			<div class="card" style="width: 350px; height: 550;">
 
-    {% if pd.image %}
+				{% if pd.image %}
 
-      <img class="card-img-top" src="{{ pd.image.url }}"width="400" style="width: 350px; height: 400; overflow: hidden;">
+				<img class="card-img-top" src="{{ pd.image.url }}" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-    {% elif pd.imageurl != None %}
+				{% elif pd.imageurl != None %}
 
-      <img class="card-img-top" src="{{ pd.imageurl }}"width="400" style="width: 350px; height: 400; overflow: hidden;">
+				<img class="card-img-top" src="{{ pd.imageurl }}" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-    {% else %}
+				{% else %}
 
-      <img class="card-img-top" src="/media/default.jpg"width="400" style="width: 350px; height: 400; overflow: hidden;">
+				<img class="card-img-top" src="/media/default.jpg" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-    {% endif %}
+				{% endif %}
 
-      <div class="card-body">
-      <h1 class="card-title">{{ pd.name }}</h1>
-      <p>ລາຄາ : {{ pd.price}} ກີບ/{{pd.unit}}</p>
-      <p>{{pd.detail|linebreaks|truncatechars_html:50}}</p>
+				<div class="card-body">
+					<h1 class="card-title">{{ pd.name }}</h1>
+					<p>ລາຄາ : {{ pd.price}} ກີບ/{{pd.unit}}</p>
+					<p>{{pd.detail|linebreaks|truncatechars_html:50}}</p>
 
-    {% if pd.quantity > 0 %}
+					{% if pd.quantity > 0 %}
 
-      <p>ສິນຄ້າມີໃນສຕ໊ອກ : {{pd.quantity }} {{pd.unit}}</p>
+					<p>ສິນຄ້າມີໃນສຕ໊ອກ : {{pd.quantity }} {{pd.unit}}</p>
 
-    {% else %}
+					{% else %}
 
-      <p><font color="red">ສິນຄ້າໃນສຕ໊ອກໝົດແລ້ວ ກະລຸນາຕິດຕໍ່ແອດມິນ</font></p>
+					<p>
+						<font color="red">ສິນຄ້າໃນສຕ໊ອກໝົດແລ້ວ ກະລຸນາຕິດຕໍ່ແອດມິນ</font>
+					</p>
 
-    {% endif %}
+					{% endif %}
 
-    {% if pd.instock == True %}
+				</div>
+			</div>
+			<br><br>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
-      <a href="#" class="btn btn-primary">ສັ່ງຊື້</a>
+<div class="container">
+	<center><a href="{% url 'allproduct-page' %}">
+			<h1>ເບິ່ງສິນຄ້າທັງໝົດ</h1>
+		</a></center>
+	<hr>
+</div>
 
-    {% else %}
+<h3>ສິນຄ້າຂາຍດີ (ຕ້ອງ preorder)</h3>
+<p>preorder ລ່ວງໜ້າ 20 ມື້</p>
 
-      <a href="#" class="btn btn-danger">ສິນຄ້າໝົດແລ້ວ</a>
+<div class="container-fluid">
 
-    {% endif %}
+	<div class="row">
 
-    </div>
-    </div>
-      <br><br>
-    </div>
-  {% endfor %}
-   </div>
-  </div>
+		{% for pd in preorder %}
 
-  <div class="container">
-    <center><a href="{% url 'allproduct-page' %}"><h1>ເບິ່ງສິນຄ້າທັງໝົດ</h1></a></center>
-    <hr>
-  </div>
+		<div class="container col-sm-4">
+			<div class="card" style="width: 350px; height: 550;">
 
-  <h3>ສິນຄ້າຂາຍດີ (ຕ້ອງ preorder)</h3>
-   <p>preorder ລ່ວງໜ້າ 20 ມື້</p>
+				{% if pd.image %}
 
-  <div class="container-fluid">
+				<img class="card-img-top" src="{{ pd.image.url }}" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-    <div class="row">
+				{% elif pd.imageurl != None %}
 
-   {% for pd in preorder %}
+				<img class="card-img-top" src="{{ pd.imageurl }}" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-     <div class="container col-sm-4">
-     <div class="card" style="width: 350px; height: 550;">
+				{% else %}
 
-    {% if pd.image %}
+				<img class="card-img-top" src="/media/default.jpg" width="400"
+					style="width: 350px; height: 400; overflow: hidden;">
 
-      <img class="card-img-top" src="{{ pd.image.url }}"width="400" style="width: 350px; height: 400; overflow: hidden;">
+				{% endif %}
 
-    {% elif pd.imageurl != None %}
+				<div class="card-body">
+					<h1 class="card-title">{{ pd.name }}</h1>
+					<p>ລາຄາ : {{ pd.price}} ກີບ/{{pd.unit}}</p>
+					<p>{{pd.detail|linebreaks|truncatechars_html:50}}</p>
 
-      <img class="card-img-top" src="{{ pd.imageurl }}"width="400" style="width: 350px; height: 400; overflow: hidden;">
+					{% if pd.quantity > 0 %}
 
-    {% else %}
+					<p>ສິນຄ້າມີໃນສຕ໊ອກ : {{pd.quantity }} {{pd.unit}}</p>
 
-      <img class="card-img-top" src="/media/default.jpg"width="400" style="width: 350px; height: 400; overflow: hidden;">
+					{% else %}
 
-    {% endif %}
+					<p>
+						<font color="red">ສິນຄ້າໝົດແລ້ວ preorder ໄດ້</font>
+					</p>
+					<a href="#" class="btn btn-warning">Pre-Order</a>
 
-      <div class="card-body">
-      <h1 class="card-title">{{ pd.name }}</h1>
-      <p>ລາຄາ : {{ pd.price}} ກີບ/{{pd.unit}}</p>
-      <p>{{pd.detail|linebreaks|truncatechars_html:50}}</p>
+					{% endif %}
 
-    {% if pd.quantity > 0 %}
-
-      <p>ສິນຄ້າມີໃນສຕ໊ອກ : {{pd.quantity }} {{pd.unit}}</p>
-
-    {% else %}
-
-      <p><font color="red">ສິນຄ້າໝົດແລ້ວ preorder ໄດ້</font></p>
-      <a href="#" class="btn btn-warning">Pre-Order</a>
-
-    {% endif %}
-
-    </div>
-    </div>
-      <br><br>
-    </div>
-  {% endfor %}
-   </div>
-  </div>
+				</div>
+			</div>
+			<br><br>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
 {% endblock content %}
-
-

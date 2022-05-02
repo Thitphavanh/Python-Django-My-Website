@@ -4,57 +4,57 @@
 {% block content %}
 
 {% if status == 'delete' %}
-   <div class="alert alert-danger">
-       <strong>ລຶບສິນຄ້າຮຽບຮ້ອຍແລ້ວ !</strong> ຫາກຕ້ອງການສິນຄ້າ ກະລຸນາກົດສັ່ງໃໝ່
-   </div>
+	 <div class="alert alert-danger">
+			 <strong>ລຶບສິນຄ້າຮຽບຮ້ອຍແລ້ວ !</strong> ຫາກຕ້ອງການສິນຄ້າ ກະລຸນາກົດສັ່ງໃໝ່
+	 </div>
 {% endif %}
 <br>
-      
+			
 <div class="container">
-  <h2>ແກ້ໄຂຂໍ້ມູນໃນກະຕ່າສິນຄ້າ</h2>
-  <p>ເຈົ້າສາມາດແກ້ໄຂຂໍ້ມູນໃນກະຕ່າສິນຄ້າໄດ້</p>
-  <form method="POST" id="formsave">  
-  {% csrf_token %}          
-  <table class="table">
-  <thead>
-  <tr>
-    <th>ລະຫັດສິນຄ້າ</th>
-    <th>ຊື່ສິນຄ້າ</th>
-    <th>ລາຄາສິນຄ້າ</th>
-    <th>ຈຳນວນສິນຄ້າ</th>
-    <th>ລົບສິນຄ້າ</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for pd in mycart %}
-  <tr>
-    <td>{{pd.productid}}</td>
-    <td>{{pd.productname}}</td>
-    <td>{{pd.price|intcomma}}</td>
-    <td><input type="text" name="pd_{{pd.productid}}" value="{{pd.quantity}}"></td>
+	<h2>ແກ້ໄຂຂໍ້ມູນໃນກະຕ່າສິນຄ້າ</h2>
+	<p>ເຈົ້າສາມາດແກ້ໄຂຂໍ້ມູນໃນກະຕ່າສິນຄ້າໄດ້</p>
+	<form method="POST" id="formsave">  
+	{% csrf_token %}          
+	<table class="table">
+	<thead>
+	<tr>
+		<th>ລະຫັດສິນຄ້າ</th>
+		<th>ຊື່ສິນຄ້າ</th>
+		<th>ລາຄາສິນຄ້າ</th>
+		<th>ຈຳນວນສິນຄ້າ</th>
+		<th>ລົບສິນຄ້າ</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for pd in mycart %}
+	<tr>
+		<td>{{pd.productid}}</td>
+		<td>{{pd.productname}}</td>
+		<td>{{pd.price|intcomma}}</td>
+		<td><input type="text" name="pd_{{pd.productid}}" value="{{pd.quantity}}"></td>
 
-  <th> 
-    -
-  </th>
-  </tr>
-  {% endfor %}
-    </tbody>
-  </table>
+	<th> 
+		-
+	</th>
+	</tr>
+	{% endfor %}
+		</tbody>
+	</table>
 
-      <input type="hidden" name="checksave" value="checksave">
-      
+			<input type="hidden" name="checksave" value="checksave">
+			
 
-   </form>
-   <div class="row">
+	 </form>
+	 <div class="row">
 
-      <button type="submit" form="formsave" class="btn btn-primary">ບັນທຶກ</button> 
-      <div style="padding: 10px;"></div>
-      <form id="formclear" method="POST" onsubmit="return confirm('ຍືນຍັນການລົບສິນຄ້າທັງໝົດແມ່ນ ຫຼື ບໍ່?');">
-  {% csrf_token %}
-      <input type="hidden" name="clear" value="clear">
-      <button type="submit" form="formclear" class="btn btn-danger">ລົບສິນຄ້າທັງໝົດ</button> 
-      </form>
-    </div>
+			<button type="submit" form="formsave" class="btn btn-primary">ບັນທຶກ</button> 
+			<div style="padding: 10px;"></div>
+			<form id="formclear" method="POST" onsubmit="return confirm('ຍືນຍັນການລົບສິນຄ້າທັງໝົດແມ່ນ ຫຼື ບໍ່?');">
+	{% csrf_token %}
+			<input type="hidden" name="clear" value="clear">
+			<button type="submit" form="formclear" class="btn btn-danger">ລົບສິນຄ້າທັງໝົດ</button> 
+			</form>
+		</div>
 </div>
 
 {% endblock content %}

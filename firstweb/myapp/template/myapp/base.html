@@ -1,109 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Phenomenal Bottega</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Phenomenal Bottega</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<div class="jumbotron text-center" style="margin-bottom: 0;">
-  <h1>Phenomenal Bottega</h1>
-</div>
+	<div class="jumbotron text-center" style="margin-bottom: 0;">
+		<h1>Phenomenal Bottega</h1>
+	</div>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
-  <a class="navbar-brand" href="/">Phenomenal Bottega</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      <a class="nav-link" href="{% url 'about-page' %}">ກ່ຽວກັບເຮົາ </a> 
-      </li>
+		<a class="navbar-brand" href="/">Phenomenal Bottega</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'about-page' %}">ກ່ຽວກັບເຮົາ </a>
+				</li>
 
-      <li class="nav-item">
-      <a class="nav-link" href="{% url 'contact-page' %}">ຕິດຕໍ່ເຮົາ </a> 
-      </li> 
-   
-       <li class="nav-item">
-      <a class="nav-link" href="{% url 'allproduct-page' %}">ສິນຄ້າທັງໝົດ </a>
-      </li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'contact-page' %}">ຕິດຕໍ່ເຮົາ </a>
+				</li>
 
-      </li>  
-      <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ປະເພດສິນຄ້າ</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown01">
-        <a class="dropdown-item" href="#">ເສື້ອຜ້າຜູ້ຍິງ</a>
-        <a class="dropdown-item" href="#">ເສື້ອຜ້າເດັກນ້ອຍ</a>
-        <a class="dropdown-item" href="#">ເສື້ອຜ້າຜູ້ໃຫຍ່</a>
-      </div>
-      </li> 
-       {% if user.is_authenticated and user.profile.usertype == 'member' %}
-      <li class="nav-item">
-      <a class="nav-link" href="{% url 'mycart-page' %}">ກະຕ່າສິນຄ້າ <span class="badge badge-primary">{{user.profile.cartquan}}</span></a>
-      </li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'allproduct-page' %}">ສິນຄ້າທັງໝົດ </a>
+				</li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'orderlist-page' %}">ລາຍການສັ່ງຊື້</a> 
-      </li>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">ປະເພດສິນຄ້າ</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="#">ເສື້ອຜ້າຜູ້ຍິງ</a>
+						<a class="dropdown-item" href="#">ເສື້ອຜ້າເດັກນ້ອຍ</a>
+						<a class="dropdown-item" href="#">ເສື້ອຜ້າຜູ້ໃຫຍ່</a>
+					</div>
+				</li>
+				{% if user.is_authenticated and user.profile.usertype == 'member' %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'mycart-page' %}">ກະຕ່າສິນຄ້າ <span
+							class="badge badge-primary">{{user.profile.cartquan}}</span></a>
+				</li>
 
-      {% endif %} 
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'orderlist-page' %}">ລາຍການສັ່ງຊື້</a>
+				</li>
 
-      {% if user.is_authenticated and user.profile.usertype == 'admin' %}
-       <li class="nav-item">
-      
-      <a class="nav-link" href="{% url 'addproduct-page' %}">ເພີ່ມສິນຄ້າ </a> 
-      
-      </li>
+				{% endif %}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'allorderlist-page' %}">ລາຍການສັ່ງຊື້ທັງໝົດ</a> 
-      </li>
+				{% if user.is_authenticated and user.profile.usertype == 'admin' %}
+				<li class="nav-item">
 
-      {% endif %}
+					<a class="nav-link" href="{% url 'addproduct-page' %}">ເພີ່ມສິນຄ້າ </a>
 
-    </ul>
+				</li>
 
-      {% if user.is_authenticated %} 
-        <img src="{{user.profile.photo.url}}" width="45" height="45" class="rounded-circle">&nbsp&nbsp&nbsp           
-        <p style="color: white; margin-top: 10px;">ສະບາຍດີເຈົ້າ &nbsp&nbsp {{user.first_name}} &nbsp {{user.last_name}}&nbsp&nbsp&nbsp</p> 
-        <a class="btn btn-danger" href="/logout/">ອອກຈາກລະບົບ</a> 
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'allorderlist-page' %}">ລາຍການສັ່ງຊື້ທັງໝົດ</a>
+				</li>
 
-      {% else %} 
-        <a class="btn btn-primary" href="{% url 'register-page' %}">ສະໝັກສະມາຊິກ</a> &nbsp&nbsp&nbsp
-        <a class="btn btn-primary" href="/login/">ເຂົ້າສູ່ລະບົບ</a> 
-      {% endif %}                   
-                              
-  </div>   
-</nav>
+				{% endif %}
 
-<div class="container">
-  {% if user.is_authenticated %} 
-  
-   {% if user.verifyemail.approved == False %}
-  <div class="alert alert-warning alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>ກະລຸນາຍືນຍັນສະມາຊິກ !</strong> ກະລຸນາກວດສອບອີເມລ໌ອີກຄັ້ງ <<ຂໍລະຫັດອີກຄັ້ງ>>
-  </div>
+			</ul>
 
-  {% endif %}
+			{% if user.is_authenticated %}
+			<img src="{{user.profile.photo.url}}" width="45" height="45" class="rounded-circle">&nbsp&nbsp&nbsp
+			<p style="color: white; margin-top: 10px;">ສະບາຍດີເຈົ້າ &nbsp&nbsp {{user.first_name}} &nbsp
+				{{user.last_name}}&nbsp&nbsp&nbsp</p>
+			<a class="btn btn-danger" href="/logout/">ອອກຈາກລະບົບ</a>
 
- {% endif %}
-</div>
-  
-<div class="container" style="margin-top: 20px;">
+			{% else %}
+			<a class="btn btn-primary" href="{% url 'register-page' %}">ສະໝັກສະມາຊິກ</a> &nbsp&nbsp&nbsp
+			<a class="btn btn-primary" href="/login/">ເຂົ້າສູ່ລະບົບ</a>
+			{% endif %}
+
+		</div>
+	</nav>
+
+	<div class="container">
+		{% if user.is_authenticated %}
+
+		{% if user.verifyemail.approved == False %}
+		<div class="alert alert-warning alert-dismissible">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>ກະລຸນາຍືນຍັນສະມາຊິກ !</strong> ກະລຸນາກວດສອບອີເມລ໌ອີກຄັ້ງ <<ຂໍລະຫັດອີກຄັ້ງ>>
+		</div>
+
+		{% endif %}
+
+		{% endif %}
+	</div>
+
+	<div class="container" style="margin-top: 20px;">
 
 
 
-  {% block content %}
-  {% endblock content %}
-</div>
+		{% block content %}
+		{% endblock content %}
+	</div>
 
 </body>
+
 </html>

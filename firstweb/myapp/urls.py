@@ -20,4 +20,5 @@ urlpatterns = [
 	path('updatetracking/<str:orderid>/', UpdateTracking, name='updatetracking'),
 	path('myorder/<str:orderid>/', MyOrder, name='myorder-page'),
 	path('confirm/<str:token>/', Confirm, name='confirm-email'),
+	
 ]
