@@ -168,13 +168,14 @@ def Product(request):
 
 
 def ProductCatagory(request, code):
-    product = Allproduct.objects.all().order_by(
-        'id').reverse()  # ແມ່ນການດຶງຂໍ້ມູນມາທັງໝົດ
-    paginator = Paginator(product, 3)  # 1 ໜ້າໂຊວ 15 ອັນ
-    page = request.GET.get('page')
-    product = paginator.get_page(page)
-    context = {'product': product}
-    return render(request, 'myapp/allproduct.html', context)
+	select = Catagory.objects.get(id=code)
+	product = Allproduct.objects.filter(catagoryname=select).order_by(
+		'id').reverse()  # ແມ່ນການດຶງຂໍ້ມູນມາທັງໝົດ
+	paginator = Paginator(product, 3)  # 1 ໜ້າໂຊວ 15 ອັນ
+	page = request.GET.get('page')
+	product = paginator.get_page(page)
+	context = {'product': product,'catagoryname':select.catagoryname}
+	return render(request, 'myapp/allproductcat.html', context)
 
 
 def Register(request):

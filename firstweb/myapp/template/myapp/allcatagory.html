@@ -1,5 +1,5 @@
 {% for cat in allcatagorys %}
 
-<a class="dropdown-item" href="#">{{cat.catagoryname}}</a>
+<a class="dropdown-item" href="{% url 'catagory-page' cat.id %}">{{cat.catagoryname}}</a>
 
 {% endfor %}
