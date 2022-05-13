@@ -50,4 +50,12 @@ class OrderPendingtAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OrderPending, OrderPendingtAdmin)
-admin.site.register(VerifyEmail)
+
+
+class VerifyEmailAdmin(admin.ModelAdmin):
+	list_display = ['user', 'token', 'approved']
+
+
+admin.site.register(VerifyEmail,VerifyEmailAdmin)
+
+

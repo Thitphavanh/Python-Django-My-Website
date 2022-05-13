@@ -210,7 +210,7 @@ def Register(request):
 		addverify.token = token_code
 		addverify.save()
 
-		# sendthai(email, subject, msg)
+		sendthai(email, subject, msg)
 
 		# from django.contrib.auth import authenticate, login
 		user = authenticate(username=email, password=password)
