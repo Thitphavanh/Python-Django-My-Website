@@ -1,0 +1,30 @@
+ວິທີການຕິດຕັ້ງ ການເຮັດ API8
+
+pip -V
+
+pip list
+
+pip install virtualenv
+
+C:\Users\Hery\Desktop\My Projects\Flutter-Django-REST-API>
+
+python -m virtualenv
+
+python -m virtualenv venv
+
+.\venv\scripts\activate
+
+pip install django==3.2
+
+django-admin startproject mydjangoapi
+
+python manage.py runserver
+
+python manage.py migrate
+
+python manage.py createsuperuser (Username: admin, Password: hery18205208038)
+
+python manage.py startapp (myapp)
+
+
+
