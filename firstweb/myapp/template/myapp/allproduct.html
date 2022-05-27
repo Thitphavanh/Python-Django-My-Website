@@ -1,5 +1,5 @@
 {% extends 'myapp/base.html' %}
-
+{% load markdown_extras %}
 {% block content %}
 
 <h3>ສິນຄ້າທັງໝົດໃນຮ້ານ</h3>
@@ -12,7 +12,7 @@
 		{% for pd in product %}
 
 		<div class="container col-sm-4">
-			<div class="card" style="width: 350px; height: 550;">
+			<div class="card" style="width: 350px; height: 800px;">
 
 				{% if pd.image %}
 
@@ -34,7 +34,12 @@
 				<div class="card-body">
 					<h1 class="card-title">{{ pd.name }}</h1>
 					<p>ລາຄາ : {{ pd.price}} ກີບ/{{pd.unit}}</p>
-					<p>{{pd.detail|linebreaks|truncatechars_html:50}}</p>
+					<p>{{pd.detail|markdown|safe|truncatechars_html:100}}
+
+					<a href="{% url 'detail-page' pd.id %}"target="_blank">ລາຍລະອຽດ</a>
+
+
+					</p>
 
 					{% if pd.quantity > 0 %}
 

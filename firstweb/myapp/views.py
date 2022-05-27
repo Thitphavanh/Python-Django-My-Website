@@ -641,7 +641,10 @@ def MyOrder(request, orderid):
 
 
 def ProductDetail(request, productid):
+	# localhost:8000/product/10
 	product = Allproduct.objects.get(id=productid)
+	context = {'product':product}
+	return render(request, 'myapp/productdetail.html',context)
 
 
 

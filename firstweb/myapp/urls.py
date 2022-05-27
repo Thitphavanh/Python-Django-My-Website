@@ -10,17 +10,18 @@ urlpatterns = [
 	path('allproduct/', Product, name='allproduct-page'),
 	path('register/', Register, name='register-page'),
 	path('addtocart/<int:pid>/', AddtoCart, name='addtocart-page'),
-	path('mycart/',MyCart, name='mycart-page'),
-	path('mycartedit/',MyCartEdit, name='mycartedit-page'),
+	path('mycart/', MyCart, name='mycart-page'),
+	path('mycartedit/', MyCartEdit, name='mycartedit-page'),
 	path('checkout/', Checkout, name='checkout-page'),
 	path('orderlist/', OrderlistPage, name='orderlist-page'),
 	path('allorderlist/', AllOrderlistPage, name='allorderlist-page'),
 	path('uploadslip/<str:orderid>/', UploadSlip, name='uploadslip-page'),
 	path('updatestatus/<str:orderid>/<str:status>/',UpdatePaid, name='updatestatus'),
-	path('updatetracking/<str:orderid>/', UpdateTracking, name='updatetracking'),
+	path('updatetracking/<str:orderid>/',UpdateTracking, name='updatetracking'),
 	path('myorder/<str:orderid>/', MyOrder, name='myorder-page'),
 	path('confirm/<str:token>/', Confirm, name='confirm-email'),
 	path('catagory/<int:code>/', ProductCatagory, name='catagory-page'),
-	path('testmd/',TestMd,name='testmd-page'),
-	
+	path('testmd/', TestMd, name='testmd-page'),
+	path('product/<int:productid>/', ProductDetail, name='detail-page')
+
 ]
