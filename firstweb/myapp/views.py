@@ -11,6 +11,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import random
+import markdown as md
 
 # -------Generate Token--------
 
@@ -638,8 +639,32 @@ def MyOrder(request, orderid):
 	return render(request, 'myapp/myorder.html', context)
 
 
+
+def ProductDetail(request, productid):
+	product = Allproduct.objects.get(id=productid)
+
+
+
+
+
+
+text = '''
+[My Facebook](https://www.facebook.com/)
+# Product from my store
+**Premium** product from my store
+
+*fast sell from our*
+
+
+
+
+
+
+'''
+
 def TestMd(request):
-	text = '#Test Header'
+	
+	print(md.markdown(text, extensions=['markdown.extensions.fenced_code']))
 	context = {'text':text}
 	return render(request,'myapp/testmd.html',context)
 

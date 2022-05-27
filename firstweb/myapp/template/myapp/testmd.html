@@ -1,11 +1,5 @@
-{% load markdown_extras %}
+{% extends 'myapp/base.html' %} {% load markdown_extras %} {% block content %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>TEST MD</title>
-  </head>
-  <body>
-    {{text | markdown | safe}}
-  </body>
-</html>
+<h3>ການສະແດງຜົນ Markdown?</h3>
+
+{{text | markdown | safe}} {% endblock content %}

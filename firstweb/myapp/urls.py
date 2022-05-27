@@ -21,5 +21,6 @@ urlpatterns = [
 	path('myorder/<str:orderid>/', MyOrder, name='myorder-page'),
 	path('confirm/<str:token>/', Confirm, name='confirm-email'),
 	path('catagory/<int:code>/', ProductCatagory, name='catagory-page'),
+	path('testmd/',TestMd,name='testmd-page'),
 	
 ]
