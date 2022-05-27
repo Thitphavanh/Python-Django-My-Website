@@ -637,23 +637,9 @@ def MyOrder(request, orderid):
 
 	return render(request, 'myapp/myorder.html', context)
 
-	'''
-	- orderlist
-		- object (1)
-			- orderid : D121313
-			- product : iPhone
-			- total : 500000
-		- object (2)
-			- orderid : D121313
-			- product : iPad
-			- total : 500000
-		- object (3)
-			- orderid : D121313
-			- product : iWatch
-			- total : 500000
-		- object (4)
-			- orderid : D121314
-			- product : iMac
-			- total : 500000
 
-	'''
+def TestMd(request):
+	text = '#Test Header'
+	context = {'text':text}
+	return render(request,'myapp/testmd.html',context)
+
