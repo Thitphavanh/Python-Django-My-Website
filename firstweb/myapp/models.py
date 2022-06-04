@@ -73,6 +73,7 @@ class OrderPending(models.Model):
     other = models.TextField(blank=True, null=True)
     stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     paid = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
     slip = models.ImageField(upload_to="slip", null=True, blank=True)
     sliptime = models.CharField(max_length=100, null=True, blank=True)
     paymentid = models.CharField(max_length=100, null=True, blank=True)

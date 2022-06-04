@@ -567,8 +567,16 @@ def UpdatePaid(request, orderid, status):
 	order = OrderPending.objects.get(orderid=orderid)
 	if status == 'confirm':
 		order.paid = True
+		order.confirmed = True
+		odlist = OrderList.objects.filter(orderid=orderid)
+		for od in odlist:
+			product = Allproduct.objects.get(id=od.orderid)
+			product.quantity = product.quantity - od.quantity
+			product.save()
+
 	elif status == 'cancel':
 		order.paid = False
+		order.confirmed =False
 	order.save()
 	return redirect('allorderlist-page')
 
