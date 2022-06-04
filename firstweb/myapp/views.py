@@ -570,7 +570,7 @@ def UpdatePaid(request, orderid, status):
 		order.confirmed = True
 		odlist = OrderList.objects.filter(orderid=orderid)
 		for od in odlist:
-			product = Allproduct.objects.get(id=od.orderid)
+			product = Allproduct.objects.get(id=od.productid)
 			product.quantity = product.quantity - od.quantity
 			product.save()
 
@@ -654,8 +654,11 @@ def ProductDetail(request, productid):
 	context = {'product':product}
 	return render(request, 'myapp/productdetail.html',context)
 
-
-
+def EditProduct(request, productid):
+	# localhost:8000/product/10
+	product = Allproduct.objects.get(id=productid)
+	context = {'product':product}
+	return render(request, 'myapp/editproduct.html',context)
 
 
 

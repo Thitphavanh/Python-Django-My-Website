@@ -1,0 +1,120 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="container" style="margin-bottom: 100px">
+		<h2>ແກ້ໄຂລາຍລະອຽດສິນຄ້າ : {{product.name}}</h2>
+
+		<p>ເຈົ້າສາມາດເພີ່ມສິນຄ້າເຂົ້້າໄປໃນລະບົບໄດ້ (ສະເພາະ admin)</p>
+		<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+
+				<h1>CAT {{product.catagoryname}}</h1>
+
+				<div class="form-group">
+						<label for="name">ຊື່ສິນຄ້າ:</label>
+						<input type="text" class="form-control" id="name" name="name" value="{{product.name}}" />
+				</div>
+
+				<div class="form-group">
+						<label for="price">ລາຄາ:</label>
+						<input type="text" class="form-control" id="price" name="price" value="{{product.price}}" />
+				</div>
+
+				<div class="form-group">
+						<label for="detail">ລາຍລະອຽດ:</label>
+						<textarea class="form-control" rows="10" id="detail" name="detail">
+{{product.detail}}</textarea
+			>
+		</div>
+
+		<div class="form-group">
+			<label for="imageurl">URL ຮູບສິນຄ້າ:</label>
+			<input
+				type="text"
+				class="form-control"
+				id="imageurl"
+				name="imageurl"
+				value="{{product.imageurl}}"
+			/>
+		</div>
+
+		<div class="form-group">
+			<p>ມີໃນສະຕ໊ອກ ຫຼື ບໍ?</p>
+
+			{% if product.instock %}
+
+			<input
+				type="radio"
+				id="instock_true"
+				name="instock"
+				value="instock_true"
+				checked
+			/>
+			<label for="male">ມີ</label><br />
+			<input
+				type="radio"
+				id="instock_false"
+				name="instock"
+				value="instock_false"
+			/>
+			<label for="male">ໝົດ</label><br />
+
+			{% else %}
+
+			<input
+				type="radio"
+				id="instock_true"
+				name="instock"
+				value="instock_true"
+			/>
+			<label for="male">ມີ</label><br />
+			<input
+				type="radio"
+				id="instock_false"
+				name="instock"
+				value="instock_false"
+				checked
+			/>
+			<label for="male">ໝົດ</label><br />
+
+			{% endif %}
+		</div>
+
+		<div class="form-group">
+			<label for="quantity">ຈຳນວນສິນຄ້າ:</label>
+			<input
+				type="text"
+				class="form-control"
+				id="quantity"
+				name="quantity"
+				value="{{product.quantity}}"
+			/>
+		</div>
+
+		<div class="form-group">
+			<label for="unit">ໜ່ວຍສິນຄ້າ:</label>
+			<input
+				type="text"
+				class="form-control"
+				id="unit"
+				name="unit"
+				value="{{product.unit}}"
+			/>
+		</div>
+
+		<div class="form-group">
+			<label for="imageupload">ເລືອກຮູບພາບ</label>
+			<input
+				type="file"
+				class="form-control"
+				id="imageupload"
+				name="imageupload"
+			/><br /><br />
+		</div>
+
+		<img src="{{product.image.url}}" width="600" /><br /><br />
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+{% endblock content %}

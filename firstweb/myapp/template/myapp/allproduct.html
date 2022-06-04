@@ -53,20 +53,17 @@
 
 					{% endif %}
 
-					{% if pd.instock == True %}
 
-					{% if user.is_authenticated %}
 
-					<a href="{% url 'addtocart-page' pd.id %}" class="btn btn-primary">ສັ່ງຊື້</a>
-					{% else %}
-					<a href="{% url 'login' %}" class="btn btn-primary">ສັ່ງຊື້</a>
+					
+					{% if user.is_authenticated and user.profile.usertype == 'admin' %}
+
+					<a href="{% url 'editproduct-page' pd.id %}" class="btn btn-primary">ແກ້ໄຂສິນຄ້າ</a>
+					
+			
 					{% endif %}
+						
 
-					{% else %}
-
-					<a href="#" class="btn btn-danger">ສິນຄ້າໝົດແລ້ວ</a>
-
-					{% endif %}
 
 				</div>
 			</div>

@@ -22,6 +22,7 @@ urlpatterns = [
 	path('confirm/<str:token>/', Confirm, name='confirm-email'),
 	path('catagory/<int:code>/', ProductCatagory, name='catagory-page'),
 	path('testmd/', TestMd, name='testmd-page'),
-	path('product/<int:productid>/', ProductDetail, name='detail-page')
+	path('product/<int:productid>/', ProductDetail, name='detail-page'),
+	path('editproduct/<int:productid>/', EditProduct, name='editproduct-page'),
 
 ]
