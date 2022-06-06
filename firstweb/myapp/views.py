@@ -12,10 +12,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import random
 import markdown as md
+from django.contrib.auth.decorators import login_required
+
+
+# -------CheckAdmin--------
+def CheckNotAdmin(request):
+	if request.user.profile.usertype != 'admin':
+		return True
+	else:
+		return False
 
 # -------Generate Token--------
-
-
 def GenerateToken(domain='http://localhost:8000/confirm/'):
 	allchr = [chr(i) for i in range(65, 91)]
 	allchr.extend([chr(i) for i in range(97, 123)])
@@ -654,11 +661,56 @@ def ProductDetail(request, productid):
 	context = {'product':product}
 	return render(request, 'myapp/productdetail.html',context)
 
+@login_required
 def EditProduct(request, productid):
-	# localhost:8000/product/10
+	# localhost:8000/editproduct/10
+	check = CheckNotAdmin(request)
+	print('CHECK:', check)
+	if check:
+		return redirect('home-page')
+		
+	product = Allproduct.objects.get(id=productid)
+
+
+	if request.method == 'POST':
+		data = request.POST.copy()
+		name = data.get('name')
+		price = data.get('price')
+		detail = data.get('detail')
+		imageurl = data.get('imageurl')
+		quantity = data.get('quantity')
+		unit = data.get('unit')
+
+		
+		product.name = name
+		product.price = price
+		product.detail = detail
+		product.imageurl = imageurl
+		product.quantity = quantity
+		product.unit = unit
+
+		# ------Save Image-------
+		print('FILES:', [request.FILES])
+		if 'imageupload' in request.FILES:
+			file_image = request.FILES['imageupload']
+			file_image_name = request.FILES['imageupload'].name.replace(' ', '')
+			print('FILE_iMAGE:', file_image)
+			print('IMAGE_NAME:', file_image_name)
+			fs = FileSystemStorage()
+			filename = fs.save(file_image_name, file_image)
+			upload_file_url = fs.url(filename)
+			product.image = upload_file_url[6:]
+		else:
+			print('NO')
+
+		
+		product.save()
+
 	product = Allproduct.objects.get(id=productid)
 	context = {'product':product}
 	return render(request, 'myapp/editproduct.html',context)
+
+
 
 
 
