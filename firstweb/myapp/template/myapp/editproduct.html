@@ -22,8 +22,27 @@
 				<div class="form-group">
 						<label for="detail">ລາຍລະອຽດ:</label>
 						<textarea class="form-control" rows="10" id="detail" name="detail">
-{{product.detail}}</textarea
-			>
+{{product.detail}}</textarea>
+		</div>
+
+		<div class="form-group">
+		<label for="catagory">ເລືອກປະເພດສິນຄ້າ:</label>
+      <select class="form-control" id="catagory" name="catagory">
+
+
+      	{% for ct in catagory %}
+      		{% if product.catagoryname == ct.catagoryname %}
+        	<option selected="selected">{{ct.catagoryname}} ({{ct.catagoryname}} | {{product.catagoryname}})</option>
+        	{% else %}
+        	<option>{{ct.catagoryname}}</option>
+        	{% endif %}
+
+        {% endfor %}
+
+
+
+      </select>
+
 		</div>
 
 		<div class="form-group">

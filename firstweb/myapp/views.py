@@ -670,6 +670,7 @@ def EditProduct(request, productid):
 		return redirect('home-page')
 		
 	product = Allproduct.objects.get(id=productid)
+	catagory = Catagory.objects.all()
 
 
 	if request.method == 'POST':
@@ -680,6 +681,9 @@ def EditProduct(request, productid):
 		imageurl = data.get('imageurl')
 		quantity = data.get('quantity')
 		unit = data.get('unit')
+		cat = data.get('catagory')
+		cat = Catagory.objects.get(catagoryname=cat)
+		instock = data.get('instock')
 
 		
 		product.name = name
@@ -688,6 +692,13 @@ def EditProduct(request, productid):
 		product.imageurl = imageurl
 		product.quantity = quantity
 		product.unit = unit
+		product.catagoryname = cat
+
+		if instock == 'instock_true':
+			product.instock = True
+		else:
+			product.instock = False
+
 
 		# ------Save Image-------
 		print('FILES:', [request.FILES])
@@ -707,7 +718,7 @@ def EditProduct(request, productid):
 		product.save()
 
 	product = Allproduct.objects.get(id=productid)
-	context = {'product':product}
+	context = {'product':product,'catagory':catagory}
 	return render(request, 'myapp/editproduct.html',context)
 
 

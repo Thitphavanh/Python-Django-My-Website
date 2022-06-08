@@ -41,7 +41,7 @@
 
 					</p>
 
-					{% if pd.quantity > 0 %}
+					{% if pd.quantity > 0 and pd.instock == True %}
 
 					<p>ສິນຄ້າມີໃນສຕ໊ອກ : {{pd.quantity }} {{pd.unit}}</p>
 
