@@ -28,14 +28,14 @@
 		<div class="form-group">
 		<label for="catagory">ເລືອກປະເພດສິນຄ້າ:</label>
       <select class="form-control" id="catagory" name="catagory">
-
+   
 
       	{% for ct in catagory %}
-      		{% if product.catagoryname == ct.catagoryname %}
-        	<option selected="selected">{{ct.catagoryname}} ({{ct.catagoryname}} | {{product.catagoryname}})</option>
-        	{% else %}
-        	<option>{{ct.catagoryname}}</option>
-        	{% endif %}
+      		{% if ct.catagoryname == product.catagoryname.catagoryname %}
+        	<option selected="selected">{{ct.catagoryname}}</option>
+      		{% else %}
+      		<option>{{ct.catagoryname}}</option>
+      		{% endif %}
 
         {% endfor %}
 
