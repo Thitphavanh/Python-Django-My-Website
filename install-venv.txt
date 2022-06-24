@@ -18,6 +18,10 @@ pip install django==3.2
 
 django-admin startproject mydjangoapi
 
+cd to prodject
+
+dir
+
 python manage.py runserver
 
 python manage.py migrate
