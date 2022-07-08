@@ -13,6 +13,11 @@ from email.mime.text import MIMEText
 import random
 import markdown as md
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import *
 
 
 # -------CheckAdmin--------
@@ -23,6 +28,8 @@ def CheckNotAdmin(request):
 		return False
 
 # -------Generate Token--------
+
+
 def GenerateToken(domain='http://localhost:8000/confirm/'):
 	allchr = [chr(i) for i in range(65, 91)]
 	allchr.extend([chr(i) for i in range(97, 123)])
@@ -182,7 +189,7 @@ def ProductCatagory(request, code):
 	paginator = Paginator(product, 3)  # 1 ໜ້າໂຊວ 15 ອັນ
 	page = request.GET.get('page')
 	product = paginator.get_page(page)
-	context = {'product': product,'catagoryname':select.catagoryname}
+	context = {'product': product, 'catagoryname': select.catagoryname}
 	return render(request, 'myapp/allproductcat.html', context)
 
 
@@ -583,7 +590,7 @@ def UpdatePaid(request, orderid, status):
 
 	elif status == 'cancel':
 		order.paid = False
-		order.confirmed =False
+		order.confirmed = False
 	order.save()
 	return redirect('allorderlist-page')
 
@@ -654,12 +661,12 @@ def MyOrder(request, orderid):
 	return render(request, 'myapp/myorder.html', context)
 
 
-
 def ProductDetail(request, productid):
 	# localhost:8000/product/10
 	product = Allproduct.objects.get(id=productid)
-	context = {'product':product}
-	return render(request, 'myapp/productdetail.html',context)
+	context = {'product': product}
+	return render(request, 'myapp/productdetail.html', context)
+
 
 @login_required
 def EditProduct(request, productid):
@@ -668,10 +675,9 @@ def EditProduct(request, productid):
 	print('CHECK:', check)
 	if check:
 		return redirect('home-page')
-		
+
 	product = Allproduct.objects.get(id=productid)
 	catagory = Catagory.objects.all()
-
 
 	if request.method == 'POST':
 		data = request.POST.copy()
@@ -685,7 +691,6 @@ def EditProduct(request, productid):
 		cat = Catagory.objects.get(catagoryname=cat)
 		instock = data.get('instock')
 
-		
 		product.name = name
 		product.price = price
 		product.detail = detail
@@ -699,12 +704,12 @@ def EditProduct(request, productid):
 		else:
 			product.instock = False
 
-
 		# ------Save Image-------
 		print('FILES:', [request.FILES])
 		if 'imageupload' in request.FILES:
 			file_image = request.FILES['imageupload']
-			file_image_name = request.FILES['imageupload'].name.replace(' ', '')
+			file_image_name = request.FILES['imageupload'].name.replace(
+				' ', '')
 			print('FILE_iMAGE:', file_image)
 			print('IMAGE_NAME:', file_image_name)
 			fs = FileSystemStorage()
@@ -714,15 +719,17 @@ def EditProduct(request, productid):
 		else:
 			print('NO')
 
-		
 		product.save()
 
 	product = Allproduct.objects.get(id=productid)
-	context = {'product':product,'catagory':catagory}
-	return render(request, 'myapp/editproduct.html',context)
+	context = {'product': product, 'catagory': catagory}
+	return render(request, 'myapp/editproduct.html', context)
 
 
-
+def AllproductAPI(request):
+	allproduct = Allproduct.objects.all()
+	serializer = AllProductSerializer(allproduct, many=True)
+	return JsonResponse(serializer.data, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 text = '''
@@ -732,16 +739,11 @@ text = '''
 
 *fast sell from our*
 
-
-
-
-
-
 '''
 
-def TestMd(request):
-	
-	print(md.markdown(text, extensions=['markdown.extensions.fenced_code']))
-	context = {'text':text}
-	return render(request,'myapp/testmd.html',context)
 
+def TestMd(request):
+
+	print(md.markdown(text, extensions=['markdown.extensions.fenced_code']))
+	context = {'text': text}
+	return render(request, 'myapp/testmd.html', context)

@@ -24,5 +24,6 @@ urlpatterns = [
 	path('testmd/', TestMd, name='testmd-page'),
 	path('product/<int:productid>/', ProductDetail, name='detail-page'),
 	path('editproduct/<int:productid>/', EditProduct, name='editproduct-page'),
+	path('api/product/', AllproductAPI, name='api-product')
 
 ]
