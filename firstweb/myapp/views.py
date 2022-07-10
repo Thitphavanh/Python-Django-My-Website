@@ -732,6 +732,22 @@ def AllproductAPI(request):
 	return JsonResponse(serializer.data, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
+def  ProductDetailAPI(request, pid):
+	allproduct = Allproduct.objects.get(id=pid)
+	serializer = AllProductSerializer(allproduct)
+	return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False})
+
+
+@api_view(['GET'])
+def api_get_product(request,pid):
+	product = Allproduct.objects.get(id=pid)
+	if request.method == 'GET':
+		serializer = AllProductSerializer(product)
+		return Response(serializer.data)
+
+
+	
+
 text = '''
 [My Facebook](https://www.facebook.com/)
 # Product from my store
