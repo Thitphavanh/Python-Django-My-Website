@@ -746,20 +746,51 @@ def api_get_product(request,pid):
 		return Response(serializer.data)
 
 
-	
+@api_view(['POST'])
+def api_post_product(request):
+	if request.method == 'POST':
+		serializer = AllProductSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data,status=status.HTTP_201_CREATED)
+		return Response(serializer.errors,status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['PUT'])	
+def api_update_product(request,pid):
+	if request.method == 'PUT':
+		product = Allproduct.objects.get(id=pid)
+		serializer = AllProductSerializer(product, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			data = serializer.data
+			data['message'] = 'Update information'
+			return Response(serializer.data,status=status.HTTP_201_CREATED)
+		return Response(serializer.errors,status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['DELETE'])
+def api_delete_product(request, pid):
+	if request.method == 'DELETE':
+		product = Allproduct.objects.get(id=pid)
+		deleted = product.delete()
+		data = {}
+		if deleted:
+			data['message'] = 'was already deleted'
+			return Response(data=data,status=status.HTTP_200_OK)
+		else:
+			data['message'] = 'was not deleted'
+			return Response(data=data,status=status.HTTP_404_NOT_FOUND)
+
+
 
 text = '''
 [My Facebook](https://www.facebook.com/)
 # Product from my store
 **Premium** product from my store
-
 *fast sell from our*
-
 '''
-
-
 def TestMd(request):
-
 	print(md.markdown(text, extensions=['markdown.extensions.fenced_code']))
 	context = {'text': text}
 	return render(request, 'myapp/testmd.html', context)

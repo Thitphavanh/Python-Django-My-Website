@@ -27,6 +27,9 @@ urlpatterns = [
 	path('api/product/', AllproductAPI, name='api-product'),
 	# path('api/product/<int:pid>/', ProductDetailAPI, name='api-product-detail'),
 	path('api/product/<int:pid>/', api_get_product, name='api-product-detail'),
+	path('api/product/create', api_post_product, name='api-product-post'),
+	path('api/product/update/<int:pid>', api_update_product, name='api-product-update'),
+	path('api/product/delete/<int:pid>', api_delete_product, name='api-product-delete'),
 
 
 ]

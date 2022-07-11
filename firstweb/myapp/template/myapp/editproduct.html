@@ -3,7 +3,8 @@
 <div class="container" style="margin-bottom: 100px">
 		<h2>ແກ້ໄຂລາຍລະອຽດສິນຄ້າ : {{product.name}}</h2>
 
-		<p>ເຈົ້າສາມາດເພີ່ມສິນຄ້າເຂົ້້າໄປໃນລະບົບໄດ້ (ສະເພາະ admin)</p>
+
+		<p>ເຈົ້າສາມາດເພີ່ມສິນຄ້າເຂົ້າໄປໃນລະບົບໄດ້ (ສະເພາະ admin)</p>
 		<form method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 
@@ -130,7 +131,9 @@
 			/><br /><br />
 		</div>
 
-		<img src="{{product.image.url}}" width="600" /><br /><br />
+		{% if product.image %}
+			<img src="{{product.image.url}}" width="600"><br>
+		{% endif %}
 
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
