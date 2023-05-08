@@ -10,8 +10,7 @@ class VerifyEmail(models.Model):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	photo = models.ImageField(upload_to="photoprofile",
-							  null=True, blank=True, default='default.png')
+	photo = models.ImageField(upload_to="photoprofile", null=True, blank=True, default='default.png')
 	usertype = models.CharField(max_length=100, default='member')
 	cartquan = models.IntegerField(default=0)
 
